@@ -1,0 +1,40 @@
+body {
+   margin:0;
+   padding:0;
+}
+div.background-img{
+   width:100vw;
+   height:100vh;
+   box-sizing: border-box;
+   padding-top:200px;
+   background:url("https://source.unsplash.com/featured/?{workout}") 50% 50% no-repeat;
+   background-size:cover;
+
+}
+div.background-img *{
+/* 	font-size:28px; */
+	font-weight:bold;
+	text-align:center;
+}
+input {
+    width: 20%;
+    padding: 10px 10px;
+    font-size: 20px;
+}
+button{
+    font-size: 20px;
+    margin: -4px;
+    margin-top: 10px;
+    border: 1px solid royalblue; 
+    background-color: rgba(0,0,0,0); 
+    color: royalblue; 
+    padding: 5px;
+    border-radius: 5px;
+}
+button:hover{ 
+    color:white; 
+    background-color: royalblue; 
+}
+p{
+    color:white;
+}

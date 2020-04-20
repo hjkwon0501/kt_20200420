@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> SWIMMING - login </title>
+	<meta charset="utf-8">
+    <link rel= "stylesheet" type="text/css" href="/static/style_login.css">  
+    <script src="https://kit.fontawesome.com/4888670986.js" crossorigin="anonymous"></script>
+</head>
+<body >
+<div class="background-img">
+    <div>
+        <h1><a style="font-size:72px;text-decoration:none;color: #fff" href="/">LOGIN</a></h1>
+    </div>
+    <div class='login'>
+        <form action='/createMember' method='post'>
+            <p><input type='text' name='id' placeholder='UserId'></p>   
+            <p><input type="password" name='password' placeholder='Password'></p>
+            <button type='submit'>회원가입</button>
+        </form>
+    </div>
+    <div>
+        <p>{0}</p>
+    </div>
+</div>
+</body>
+</html>

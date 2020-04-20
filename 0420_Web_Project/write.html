@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> WRITE </title>
+    <meta charset="utf-8">
+    <link rel= "stylesheet" type="text/css" href="/static/style_home.css">  
+<!--     <script src="https://kit.fontawesome.com/4888670986.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"> -->
+</head>
+<body >
+    <div class="background-img">
+        <div class="grid-container">
+            <div class="grid-item"> 
+                <a href='/{0}/home'>홈화면</a>
+
+            </div>
+            <div class="grid-item">
+                <a href='/{0}/write'>쓰기</a>
+            </div>
+            <div class="grid-item">
+                <a href='/{0}/myPage'>마이페이지</a>
+            </div>
+            <div class="grid-item">
+                <a href='/'>로그아웃</a>
+            </div>
+        </div>
+       </div>
+    <div class="container">
+       <form action='/{0}/fileUpload' method='post' enctype="multipart/form-data"> 
+            <p>제목<input type='text' name='title' placeholder='제목을 입력하세요'></p> 
+            <p>내용<input type="text" name='content' placeholder='내용을 입력하세요'></p>
+            <input type="file" name="file"/>
+            <button type='submit'>제출</button>
+        </form>
+    </div>
+</body>
+</html>
+
