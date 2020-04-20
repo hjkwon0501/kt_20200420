@@ -76,7 +76,7 @@ def home(user):
         contentNum=cur_dict['contentNum']
         pictureURL="../"+pictureURL
         with open(content,'r',encoding='utf-8') as f:
-            total_html+=f"<li> <dl><dt>'{user}'</dt><dd> <img src='{pictureURL}'></dd><dd>'{f.read()}'</dd></dl></li>"
+            total_html+=f"<li> <dl><dt>'@ {id}'</dt><dd> <img src='{pictureURL}'></dd><dd>'{f.read()}'</dd></dl></li>"
     return template.format(user,total_html)
 
 @app.route("/<user>/write",  methods=['GET','POST'])
@@ -125,5 +125,5 @@ def myPage(user):
         pictureURL="../"+pictureURL
         with open(content,'r',encoding='utf-8') as f:
 #             total_html+=f"<li> '{user}' <img src='{pictureURL}'>'{f.read()}'</li>"
-            total_html+=f"<li> <dl><dt>'{user}'</dt><dd> <img src='{pictureURL}'></dd><dd>'{f.read()}'</dd></dl></li>"
+            total_html+=f"<li> <dl><dt>'@ {id}'</dt><dd> <img src='{pictureURL}'></dd><dd>'{f.read()}'</dd></dl></li>"
     return template.format(user,total_html)
