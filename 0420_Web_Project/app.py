@@ -27,7 +27,7 @@ def login():
     template=get_template('login.html')
     
     if request.method == 'GET':
-        return template+"GET" 
+        return template.format('')
     else:
         with open("static/login.txt", 'r',encoding='utf-8') as f:
             while(True):
@@ -38,8 +38,7 @@ def login():
                     if pw == str(request.form['password']):
                         return redirect(f"/{id}/home")
                     else:
-                        return template.format("패스워드가 틀렸습니다.")
-                
+                        return template.format("패스워드가 틀렸습니다.")                
         return template.format("회원이 아닙니다.")
         
 @app.route("/createMember", methods=['GET','POST'])

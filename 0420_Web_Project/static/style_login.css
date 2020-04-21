@@ -15,26 +15,30 @@ div.background-img *{
 /* 	font-size:28px; */
 	font-weight:bold;
 	text-align:center;
+    color:royalblue;
 }
-input {
+div.background-img > .login > div > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+div.background-img > .login > div > form > input {
     width: 20%;
     padding: 10px 10px;
     font-size: 20px;
+    color: black;
 }
 button{
     font-size: 20px;
-    margin: -4px;
-    margin-top: 10px;
+    margin: 10px;
     border: 1px solid royalblue; 
     background-color: rgba(0,0,0,0); 
     color: royalblue; 
-    padding: 5px;
+    padding: 10px 30px;
     border-radius: 5px;
+    cursor: pointer;
 }
 button:hover{ 
     color:white; 
     background-color: royalblue; 
-}
-p{
-    color:white;
 }

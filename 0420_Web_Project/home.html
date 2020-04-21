@@ -4,29 +4,28 @@
 	<title> HOME </title>
 	<meta charset="utf-8">
     <link rel= "stylesheet" type="text/css" href="/static/style_home.css">  
-<!--     <script src="https://kit.fontawesome.com/4888670986.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"> -->
+    <script src="https://kit.fontawesome.com/4888670986.js" crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"> -->
 </head>
-<body >
+<body>
     <div class="background-img">
         <div class="grid-container">
-            <div class="grid-item"> 
-                <a href='/{0}/home'>홈화면</a>
-
+            <div class="grid-item1"> 
+                <a href='/{0}/home'><i class="fas fa-home"></i>Let's Workout!</a>
             </div>
             <div class="grid-item">
-                <a href='/{0}/write'>쓰기</a>
+                <a href='/{0}/write'><i class="far fa-edit 5x"></i><span class="tooltiptext">write</span></a>
             </div>
             <div class="grid-item">
-                <a href='/{0}/myPage'>마이페이지</a>
+                <a href='/{0}/myPage'><i class="fas fa-history 5x"></i><span class="tooltiptext">myPage</span></a>
             </div>
             <div class="grid-item">
-                <a href='/'>로그아웃</a>
+                <a href='/'><i class="fas fa-sign-out-alt 5x"></i><span class="tooltiptext">logout</span></a>
             </div>
         </div>
     </div>
     <div class="container">
-        <div>
+        <div class="home-content">
             <ul>
             {1}
             </ul>
@@ -34,4 +33,3 @@
     </div>
 </body>
 </html>
-

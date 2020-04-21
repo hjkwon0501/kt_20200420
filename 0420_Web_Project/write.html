@@ -4,35 +4,45 @@
     <title> WRITE </title>
     <meta charset="utf-8">
     <link rel= "stylesheet" type="text/css" href="/static/style_home.css">  
-<!--     <script src="https://kit.fontawesome.com/4888670986.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"> -->
+    <script src="https://kit.fontawesome.com/4888670986.js" crossorigin="anonymous"></script>
+<!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">  -->
 </head>
-<body >
+<body>
     <div class="background-img">
         <div class="grid-container">
-            <div class="grid-item"> 
-                <a href='/{0}/home'>홈화면</a>
-
+            <div class="grid-item1"> 
+                <a href='/{0}/home'><i class="fas fa-home"></i>Let's Workout!</a>
             </div>
             <div class="grid-item">
-                <a href='/{0}/write'>쓰기</a>
+                <a href='/{0}/write'><i class="far fa-edit 5x"></i></a>
             </div>
             <div class="grid-item">
-                <a href='/{0}/myPage'>마이페이지</a>
+                <a href='/{0}/myPage'><i class="fas fa-history 5x"></i></a>
             </div>
             <div class="grid-item">
-                <a href='/'>로그아웃</a>
+                <a href='/'><i class="fas fa-sign-out-alt 5x"></i></a>
             </div>
         </div>
-       </div>
+    </div>
     <div class="container">
-       <form action='/{0}/fileUpload' method='post' enctype="multipart/form-data"> 
-            <p>제목<input type='text' name='title' placeholder='제목을 입력하세요'></p> 
-            <p>내용<input type="text" name='content' placeholder='내용을 입력하세요'></p>
-            <input type="file" name="file"/>
-            <button type='submit'>제출</button>
-        </form>
+        <div class="write-content">
+            <form action='/{0}/fileUpload' method='post' enctype="multipart/form-data"> 
+                <div>
+                    <span><i class="fas fa-caret-right"></i>제목</span>
+                    <input type='text' name='title' placeholder='제목을 입력하세요' />
+                </div>
+                <div> 
+                    <span><i class="fas fa-caret-right"></i>내용</span> 
+                    <input type="text" name='content' placeholder='내용을 입력하세요'>
+                </div>
+                <div>
+                    <input type="file" name="file"/>
+                </div>
+                <div>
+                    <button type='submit'>제출</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
-
