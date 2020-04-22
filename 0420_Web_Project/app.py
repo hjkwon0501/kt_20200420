@@ -70,6 +70,7 @@ def home(user):
     for i in range(len(total_message)):
         cur_dict=total_message[i]
         id=cur_dict['id']
+        date=cur_dict['date']
         if flag=='mypage':
             if id!=user:
                 continue
@@ -78,23 +79,27 @@ def home(user):
         contentNum=cur_dict['contentNum']
         pictureURL="../"+pictureURL
         with open(content,'r',encoding='utf-8') as f:
-            total_html+=f"<li> <dl><dt>'@ {id}'</dt><dd> <img src='{pictureURL}'></dd><dd>'{f.read()}'</dd></dl></li>"
+            total_html+=f"<li> <dl><dt>'@ {id}'</dt><dd> <img src='{pictureURL}'></dd><dd>{date}</dd><dd>'{f.read()}'</dd></dl></li>"
     return template.format(user,total_html)
 
-@app.route("/<user>/write",  methods=['GET','POST'])
-def write(user):
-    template=get_template('write.html')
-    if request.method == 'GET':
-        return template.format(user) 
-    else:
-        title=request.form['title']
-        content=request.form['content']
-        date=time.strftime('%Y-%m-%d', time.localtime(time.time()))
-    return template.format(user)
+# @app.route("/<user>/write",  methods=['GET','POST'])
+# def write(user):
+#     template=get_template('write.html')
+#     if request.method == 'GET':
+#         return template.format(user) 
+#     else:
+#         title=request.form['title']
+#         content=request.form['content']
+#         date=time.strftime('%Y-%m-%d', time.localtime(time.time()))
+#     return template.format(user)
 
 @app.route("/<user>/fileUpload", methods=['GET','POST'])
 def fileUpload(user):
+    template=get_template('write.html')
     contentNum=len(total_message)
+
+    if request.method == 'GET':
+        return template.format(user) 
     if request.method=='POST':  
         title=request.form['title']
         content=request.form['content']
