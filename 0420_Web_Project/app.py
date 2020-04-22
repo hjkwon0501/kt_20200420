@@ -57,7 +57,7 @@ def createMember():
 def home(user):
     #total_message -> type: list , content: dictionary 
     #total_message[0] : id(str), picture(str,URL), content(str),contentNum(str)
-    
+    flag=request.args.get('flag','')
     template=get_template('home.html')
     total_html=""
 
@@ -70,6 +70,9 @@ def home(user):
     for i in range(len(total_message)):
         cur_dict=total_message[i]
         id=cur_dict['id']
+        if flag=='mypage':
+            if id!=user:
+                continue
         pictureURL=cur_dict['picture']
         content=cur_dict['content']
         contentNum=cur_dict['contentNum']
@@ -109,20 +112,20 @@ def fileUpload(user):
             total_message.append(json.loads("{"+f'"id":"{user}", "title":"{title}", "date": "{date}", "picture": "{pic_URL}", "content":"{cont_URL}", "contentNum": "{contentNum}"'+"}"))
     return redirect(f"/{user}/home".format(user))
 
-@app.route("/<user>/myPage")
-def myPage(user):
-    template=get_template('home.html')
-    total_html=""
-    for i in range(len(total_message)):
-        cur_dict=total_message[i]
-        if cur_dict['id']!=user:
-            continue
-        id=cur_dict['id']
-        pictureURL=cur_dict['picture']
-        content=cur_dict['content']
-        contentNum=cur_dict['contentNum']
-        pictureURL="../"+pictureURL
-        with open(content,'r',encoding='utf-8') as f:
-#             total_html+=f"<li> '{user}' <img src='{pictureURL}'>'{f.read()}'</li>"
-            total_html+=f"<li> <dl><dt>'@ {id}'</dt><dd> <img src='{pictureURL}'></dd><dd>'{f.read()}'</dd></dl></li>"
-    return template.format(user,total_html)
+# @app.route("/<user>/myPage")
+# def myPage(user):
+#     template=get_template('home.html')
+#     total_html=""
+#     for i in range(len(total_message)):
+#         cur_dict=total_message[i]
+#         if cur_dict['id']!=user:
+#             continue
+#         id=cur_dict['id']
+#         pictureURL=cur_dict['picture']
+#         content=cur_dict['content']
+#         contentNum=cur_dict['contentNum']
+#         pictureURL="../"+pictureURL
+#         with open(content,'r',encoding='utf-8') as f:
+# #             total_html+=f"<li> '{user}' <img src='{pictureURL}'>'{f.read()}'</li>"
+#             total_html+=f"<li> <dl><dt>'@ {id}'</dt><dd> <img src='{pictureURL}'></dd><dd>'{f.read()}'</dd></dl></li>"
+#     return template.format(user,total_html)
