@@ -1,5 +1,4 @@
 "id":"test1", "title":"t1", "date": "2020-04-20 15:54:00", "picture": "static/USER/test1/1_picture.jpg", "content":"static/USER/test1/1_content.txt", "contentNum": "0"
 "id":"test1", "title":"t2", "date": "2020-04-20 15:54:33", "picture": "static/USER/test1/2_picture.jpg", "content":"static/USER/test1/2_content.txt", "contentNum": "1"
 "id":"test1", "title":"test3", "date": "2020-04-20 16:09:11", "picture": "static/USER/test1/3_picture.jpg", "content":"static/USER/test1/3_content.txt", "contentNum": "2"
-"id":"test1", "title":"tesss", "date": "2020-04-20 17:00:47", "picture": "static/USER/test1/4_picture.jpg", "content":"static/USER/test1/4_content.txt", "contentNum": "3"
 "id":"test3", "title":"수영", "date": "2020-04-21 00:47:17", "picture": "static/USER/test3/5_picture.jpg", "content":"static/USER/test3/5_content.txt", "contentNum": "4"

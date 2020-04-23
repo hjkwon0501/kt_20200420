@@ -3,7 +3,11 @@ import time
 from flask import Flask
 from flask import request, redirect,render_template
 import json
-# $env:FLASK_ENV="development"
+import re
+from tempfile import mkstemp
+from shutil import move, copymode
+from os import fdopen, remove
+
 
 app=Flask(__name__, static_folder='static')
     #total_message -> type: list , content: dictionary 
@@ -21,6 +25,8 @@ def get_template(filename):
         template=f.read()
     return template
 
+
+# $env:FLASK_ENV="development"
 
 @app.route("/", methods=['GET','POST'])
 def login():
@@ -48,11 +54,42 @@ def createMember():
     if request.method == 'GET':
         return template+"GET" 
     else: # # id password
-        with open("static/login.txt","a",encoding="UTF-8") as f: 
+        with open("static/login.txt","a",encoding="utf-8") as f: 
             f.write(f"{request.form['id']},{request.form['password']}\n")
         os.makedirs(os.path.join(f"static/USER/{request.form['id']}"))
     return redirect('/')
 
+def replace(file_path, regex, subst, date):
+    #Create temp file
+    fh, abs_path = mkstemp()
+    with fdopen(fh,'w',encoding="utf-8") as new_file:
+        with open(file_path,'r',encoding="utf-8") as old_file:
+            for line in old_file:
+                if regex.findall(line)[0] != str(date):
+                    new_file.write(line)
+				else:
+					total_message.remove(json.loads("{"+line+"}"))
+					
+    #Copy the file permissions from the old file to the new file
+    copymode(file_path, abs_path)
+    #Remove original file
+    remove(file_path)
+    #Move new file
+    move(abs_path, file_path)
+    
+@app.route("/<user>/remove")
+def delete_message(user):
+    #date= 2020-04-21%2000:47:17
+    #date= 2020-04-20%2015:54:00
+    date=request.args.get('date','')
+    regex = re.compile("(\d{4}-\d{2}-\d{2}_\d{2}:\d{2}:\d{2})") 
+#     for line in fileinput.input("static/total_message.txt", inplace = True):
+#         regex = re.compile("(\d{4}-\d{2}-\d{2}_\d{2}:\d{2}:\d{2})") 
+#         if regex.findall(line)[0] != date:
+#             line = line.replace(line, '')
+    replace("static/total_message.txt", regex, '', date)
+    return redirect(f"/{user}/home?flag=mypage")
+    
 @app.route("/<user>/home", methods=['GET','POST'])
 def home(user):
     #total_message -> type: list , content: dictionary 
@@ -60,6 +97,7 @@ def home(user):
     flag=request.args.get('flag','')
     template=get_template('home.html')
     total_html=""
+
     if(len(total_message)==0):
         with open('static/total_message.txt','r',encoding='utf-8') as f:      
             for i in f:
@@ -69,41 +107,37 @@ def home(user):
     for i in range(len(total_message)):
         cur_dict=total_message[i]
         id=cur_dict['id']
-        if flag=='mypage':
-            if id!=user:
-                continue
+        date=cur_dict['date']
         pictureURL=cur_dict['picture']
         content=cur_dict['content']
         contentNum=cur_dict['contentNum']
         pictureURL="../"+pictureURL
-        with open(content,'r',encoding='utf-8') as f:
-            if flag=='mypage':
-                total_html+=f"<li> <dl><dt>'@ {id}'<a href='/{user}/remove?pictureURL={pictureURL}'><i class='fas fa-trash-alt' style='float:right; padding:2px' 7x></i></a></dt><dd> <img src='{pictureURL}'></dd><dd>'{f.read()}'</dd></dl></li>"
+        print(id, user)
+        if flag == 'mypage':
+            if id == user:
+                with open(content,'r',encoding='utf-8') as f:
+                    total_html+=f"<li> <a href=/{user}/remove?date={date}><i class='fas fa-trash-alt'></i></a><dl><dt>'@ {id}'</dt><dd> <img src='{pictureURL}'></dd><dd>{date}</dd><dd>'{f.read()}'</dd></dl></li>"
             else:
-                total_html+=f"<li> <dl><dt>'@ {id}'</dt><dd> <img src='{pictureURL}'></dd><dd>'{f.read()}'</dd></dl></li>"
+                continue
+        else:
+            with open(content,'r',encoding='utf-8') as f:
+                total_html+=f"<li> <dl><dt>'@ {id}'</dt><dd> <img src='{pictureURL}'></dd><dd>{date}</dd><dd>'{f.read()}'</dd></dl></li>"
     return template.format(user,total_html)
-
-@app.route("/<user>/write",  methods=['GET','POST'])
-def write(user):
-    template=get_template('write.html')
-    if request.method == 'GET':
-        return template.format(user) 
-    else:
-        title=request.form['title']
-        content=request.form['content']
-        date=time.strftime('%Y-%m-%d', time.localtime(time.time()))
-    return template.format(user)
 
 @app.route("/<user>/fileUpload", methods=['GET','POST'])
 def fileUpload(user):
+    template=get_template('write.html')
     contentNum=len(total_message)
+
+    if request.method == 'GET':
+        return template.format(user) 
     if request.method=='POST':  
         title=request.form['title']
         content=request.form['content']
         with open(f"static/USER/{user}/{str(int(contentNum)+1)}_content.txt", 'w',encoding='utf-8') as f:
             f.write(content)
         cont_URL=f"static/USER/{user}/{str(int(contentNum)+1)}_content.txt"
-        date=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+        date=time.strftime('%Y-%m-%d_%H:%M:%S', time.localtime(time.time()))
         f=request.files['file']
         pic_URL=f"static/USER/{user}/{str(int(contentNum)+1)}_picture.jpg"
         f.save((f"static/USER/{user}/{str(int(contentNum)+1)}_picture.jpg"))
@@ -112,35 +146,4 @@ def fileUpload(user):
             files.write(f'"id":"{user}", "title":"{title}", "date": "{date}", "picture": "{pic_URL}", "content":"{cont_URL}", "contentNum": "{contentNum}"\n')
        
             total_message.append(json.loads("{"+f'"id":"{user}", "title":"{title}", "date": "{date}", "picture": "{pic_URL}", "content":"{cont_URL}", "contentNum": "{contentNum}"'+"}"))
-    return redirect(f"/{user}/home".format(user))
-
-@app.route("/<user>/remove",methods=['POST','GET'])
-def remove(user):
- 
-    pictureURL=request.args.get('pictureURL','')[3:]
-    contentURL=pictureURL.replace('picture.jpg','content.txt')
-    targetIndex=0
-    lines=[]
-    #fine file&list Index where file exist
-    with open('static/total_message.txt','r',encoding='utf-8') as f:    
-        for i in f:
-            curJson=json.loads("{"+i+"}")
-            if(curJson['id']==user and curJson['picture']==pictureURL):
-                break
-            targetIndex+=1
-    
-    #remove file Information from 'static/total_message.txt'
-    with open('static/total_message.txt','r',encoding='utf-8') as f:
-       for i in f:
-           lines.append(i)
-    with open('static/total_message.txt','w',encoding='utf-8') as f:
-        f.writelines(lines[:targetIndex]+lines[targetIndex+1:])    
-
-    #remove file Information from total_message LIST
-    total_message.pop(targetIndex)
-
-    #remove real File
-    os.remove(pictureURL)
-    os.remove(contentURL)
-    
     return redirect(f"/{user}/home".format(user))
