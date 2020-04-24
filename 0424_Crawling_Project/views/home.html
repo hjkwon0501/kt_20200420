@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> HOME </title>
+	<meta charset="utf-8">
+    <link rel= "stylesheet" type="text/css" href="/static/style_home.css">  
+    <script src="https://kit.fontawesome.com/4888670986.js" crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"> -->
+</head>
+<body>
+    <div class="background-img">
+        <div class="grid-container">
+            <div class="grid-item1"> 
+                <a href='/home'><i class="fas fa-home"></i>Let's Workout!</a>
+            </div>
+            <div class="grid-item">
+                <a href='/fileUpload'><i class="far fa-edit 5x"></i><span class="tooltiptext">write</span></a>
+            </div>
+            <div class="grid-item">
+                <a href='/home?flag=mypage'><i class="fas fa-history 5x"></i><span class="tooltiptext">myPage</span></a>
+            </div>
+            <div class="grid-item">
+                <a href='/logout'><i class="fas fa-sign-out-alt 5x"></i><span class="tooltiptext">logout</span></a>
+            </div>
+            <div class="grid-item" style="">
+                <span >{{userID}}</span>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container">
+        <div class="home-content">
+            <ul>
+            {{contents | safe}}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

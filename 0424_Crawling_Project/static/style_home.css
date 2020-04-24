@@ -1,0 +1,139 @@
+*{
+   margin:0;
+   padding:0;
+}
+
+
+div.background-img{
+    position:fixed;
+    background-color: white;
+    width:100%;
+    height:10%;
+    font-size: 30px;
+    font-weight:bold;
+    text-align:center;
+}
+div.background-img *{
+    color:black;
+    text-decoration:none;
+}
+div.background-img .grid-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid lightgrey;
+}
+div.background-img .grid-container .grid-item1{
+    width: 80vw;
+}
+div.background-img .grid-container .grid-item{
+    padding:10px;
+    position: relative;
+}
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 4px 4px 4px #eee;
+    padding: 5px 0;
+    font-size:14px;
+    /* Position the tooltip */
+    position: absolute;
+    top:100%;
+    left:0;
+    z-index: 10;
+}
+.grid-item:hover .tooltiptext {
+  visibility: visible;
+}
+
+div.container{
+   width: 100%;
+   min-height:calc(100vh - 100px);
+   padding-top: 100px;
+   background-color: rgba(var(--b3f,250,250,250),1);
+}
+div.container > .home-content{
+    padding-left:calc(50% - 542px);
+    padding-right:calc(50% - 542px);
+}
+div.container > .home-content > ul{
+   display: flex;
+   flex-wrap: wrap-reverse;
+    list-style:none;
+}
+div.container > .home-content > ul > li{
+    padding: 10px;
+}
+div.container > .home-content > ul > li > dl{
+    border: lightgrey solid 1px;
+    margin: 10px;
+    background-color: white;
+}
+div.container > .home-content > ul > li > dl > dt {}
+div.container > .home-content > ul > li > dl > dd {}
+div.container > .home-content > ul > li > dl > dd > img{
+    max-width: 500px;
+    height : auto;
+}
+div.container > .write-content{
+    padding-left:calc(50% - 542px);
+    padding-right:calc(50% - 542px);
+}
+div.container > .write-content > form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+div.container > .write-content > form > div {
+    text-align: center;
+    width: 100%;
+    margin: 5px;
+}
+div.container > .write-content > form > div > span{
+    font-size: 22px;
+    padding:6px;
+    width: 100px;
+    display: inline-block;
+    vertical-align: top; 
+}
+div.container > .write-content > form > div > span > i{
+    color:royalblue;
+    padding-right:10px;
+}
+div.container > .write-content > form > div > input[name="title"]{
+    font-size: 16px;
+    padding:8px;
+    width: 800px;
+    display: inline-block;
+}
+div.container > .write-content > form > div > input[name="content"]{
+    font-size: 16px;
+    padding:8px;
+    height: 350px;
+    width: 800px;
+    display: inline-block;
+    
+}
+div.container > .write-content > form > div > input[type="file"]{}
+div.container > .write-content > form > div > button{
+    font-size: 20px;
+    margin: 10px;
+    border: 1px solid royalblue; 
+    background-color: rgba(0,0,0,0); 
+    color: royalblue; 
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+div.container > .write-content > form > div > button:hover{ 
+    color:white; 
+    background-color: royalblue; 
+}
+
