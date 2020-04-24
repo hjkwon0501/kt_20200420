@@ -6,6 +6,7 @@ import json
 # $env:FLASK_ENV="development"
 
 app=Flask(__name__, static_folder='static')
+
     #total_message -> type: list , content: dictionary 
     #total_message[0] : id(str), title(str), picture(str,URL), content(str),contentNum(str)
 total_message=[]
@@ -83,19 +84,12 @@ def home(user):
                 total_html+=f"<li> <dl><dt>'@ {id}'</dt><dd> <img src='{pictureURL}'></dd><dd>'{f.read()}'</dd></dl></li>"
     return template.format(user,total_html)
 
-@app.route("/<user>/write",  methods=['GET','POST'])
-def write(user):
-    template=get_template('write.html')
-    if request.method == 'GET':
-        return template.format(user) 
-    else:
-        title=request.form['title']
-        content=request.form['content']
-        date=time.strftime('%Y-%m-%d', time.localtime(time.time()))
-    return template.format(user)
 
 @app.route("/<user>/fileUpload", methods=['GET','POST'])
 def fileUpload(user):
+    template=get_template('write.html')
+    if request.method=='GET':
+        return template.format(user)
     contentNum=len(total_message)
     if request.method=='POST':  
         title=request.form['title']
