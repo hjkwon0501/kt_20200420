@@ -14,16 +14,13 @@
                 <a href='/home'><i class="fas fa-home"></i>Let's Workout!</a>
             </div>
             <div class="grid-item">
-                <a href='/fileUpload'><i class="far fa-edit 5x"></i></a>
+                <a href='/fileUpload'><i class="far fa-edit 5x"></i><span class="tooltiptext">write</span></a>
             </div>
             <div class="grid-item">
-                <a href='/home?flag=mypage'><i class="fas fa-history 5x"></i></a>
+                <a href='/logout'><i class="fas fa-sign-out-alt 5x"></i><span class="tooltiptext">logout</span></a>
             </div>
             <div class="grid-item">
-                <a href='/logout'><i class="fas fa-sign-out-alt 5x"></i></a>
-            </div>
-            <div class="grid-item">
-                <span >{{userID}}</span>
+                <a href='/home?flag=mypage'>{{userID}}<span class="tooltiptext">myPage</span></a>
             </div>
         </div>
     </div>
@@ -32,11 +29,11 @@
             <form action='/fileUpload?flag={{flag}}' method='post' enctype="multipart/form-data"> 
                 <div>
                     <span><i class="fas fa-caret-right"></i>제목</span>
-                    <input type='text' name='title' placeholder='제목을 입력하세요' value={{title_modi}}>  
+                    <input type='text' name='title' placeholder='제목을 입력하세요' value="{{title_modi}}">  
                 </div>
                 <div> 
                     <span><i class="fas fa-caret-right"></i>내용</span> 
-                    <input type="text" name='content' placeholder='내용을 입력하세요' value={{text_modi}}>
+                    <input type="text" name='content' placeholder='내용을 입력하세요' value="{{text_modi|safe}}">
                 </div>
                 <div>
                     <input type="file" name="file" value={{file_modi}} />
